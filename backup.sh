@@ -1,0 +1,1 @@
+docker run --rm --volumes-from docker-configs-portainer-1 -v $(pwd):/backup busybox tar cvf /backup/backup.tar /data
