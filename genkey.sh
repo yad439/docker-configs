@@ -1,0 +1,2 @@
+openssl genpkey -out server.key -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -aes-256-cbc
+openssl req -new -x509 -days 2 -key server.key -out server.crt -subj "/C=RU/L=Novosibirsk/O=Vedblade/CN=localhost"
