@@ -1,2 +1,2 @@
 #!/bin/sh
-echo "aaaa"
+echo aaaa
