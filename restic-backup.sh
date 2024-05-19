@@ -1,0 +1,7 @@
+set -e
+# docker exec wikijs-db-1 pg_dump -U wikijs -d wiki | docker run -i --rm --hostname=wikijs -v ./backups:/mnt/backups -e RESTIC_PASSWORD=aaaa -v wikijs_db-data:/mnt/wikijs-db restic/restic --repo /mnt/backups --compression max backup --stdin --stdin-filename wikijs.sql
+docker run --rm --hostname=wikijs -v ./backups:/mnt/backups -e RESTIC_PASSWORD=aaaa -v wikijs_db-data:/mnt/wikijs-db restic/restic --repo /mnt/backups --compression max backup /mnt/wikijs-db
+docker run --rm --hostname=wikijs -v ./backups:/mnt/backups -e RESTIC_PASSWORD=aaaa -v  wikijs_wiki-content:/mnt/wikijs-content restic/restic --repo /mnt/backups --compression max backup /mnt/wikijs-content
+# docker exec nextcloud-db-1 pg_dump -U nextcloud -d nextcloud | docker run -i --rm --hostname=nextcloud -v ./backups:/mnt/backups -e RESTIC_PASSWORD=aaaa -v  nextcloud_db-data:/mnt/nextcloud-db restic/restic --repo /mnt/backups --compression max backup --stdin --stdin-filename nextcloud.sql
+docker run --rm --hostname=nextcloud -v ./backups:/mnt/backups -e RESTIC_PASSWORD=aaaa -v  nextcloud_db-data:/mnt/nextcloud-db restic/restic --repo /mnt/backups --compression max backup /mnt/nextcloud-db
+docker run --rm --hostname=nextcloud -v ./backups:/mnt/backups -e RESTIC_PASSWORD=aaaa -v  nextcloud_nextcloud-data:/mnt/nextcloud-data restic/restic --repo /mnt/backups --compression max backup /mnt/nextcloud-data
